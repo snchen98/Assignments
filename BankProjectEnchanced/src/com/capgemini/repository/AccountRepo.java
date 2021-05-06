@@ -23,6 +23,9 @@ public class AccountRepo implements AccountRepoInterface {
 
     public Account updateAccountBalance(int accountNumber, double newBalance) {
         Account account = this.accounts.get(accountNumber);
+        if (!accountExists(accountNumber)) {
+            return null;
+        }
         account.setBalance(newBalance);
         return account;
     }
