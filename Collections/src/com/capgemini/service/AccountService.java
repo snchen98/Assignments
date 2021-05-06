@@ -85,7 +85,7 @@ public class AccountService implements AccountServiceInterface {
         this.accRepo.updateAccountBalance(originAccountNumber, newOBalance);
         this.accRepo.updateAccountBalance(destinationAccountNumber, newDBalance);
         if (oAccount.getBalance() == newOBalance && dAccount.getBalance() == newDBalance) {
-                return "Transfer sucessful\n Your Balance: " + oAccount.getBalance();
+                return "Transfer sucessful\nYour Balance: " + oAccount.getBalance();
         }
         return "Transfer failed";
     }
