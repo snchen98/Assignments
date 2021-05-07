@@ -18,12 +18,12 @@ public class AccountServiceTest {
     static AccountService accService;
 
     @BeforeEach
-    public void init() {
+    public static void init() {
         accService = new AccountService();
     }
 
     @Test
-    public void getAccount_Success() throws Exception {
+    public void getAccountSuccess() throws Exception {
         int accountNumber = 123;
         double startBalance = 500;
         accService.createAccount(accountNumber, startBalance);
@@ -31,17 +31,17 @@ public class AccountServiceTest {
         assertTrue(account != null, "Account does not exist");
         assertEquals(accountNumber, account.getAccountNumber(), "Account number does not match");
         assertEquals(startBalance, account.getBalance(), "Balance does not match");
-    };
+    }
 
-    public void getAccount_Fail_InvalidAccountNumber() {
+    public void getAccountFailInvalidAccountNumber() {
         int accountNumber = 123;
-        assertThrows(InvalidAccountNumber.class, () -> {
-            accService.getAccount(accountNumber);
-        });
-    };
+        assertThrows(InvalidAccountNumber.class, () -> 
+            accService.getAccount(accountNumber)
+        );
+    }
 
     @Test
-    public void createAccount_Success() throws Exception {
+    public void createAccountSuccess() throws Exception {
         int accountNumber = 123;
         double startBalance = 500;
         String message = accService.createAccount(accountNumber, startBalance);
@@ -49,7 +49,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void createAccount_Fail_AccountAlreadyExist() {
+    public void createAccountFailAccountAlreadyExist() {
         int accountNumber = 123;
         double startBalance = 500;
         assertThrows(AccountAlreadyExist.class, () -> {
@@ -59,7 +59,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void createAccount_Fail_InsufficientOpeningBalance() {
+    public void createAccountFailInsufficientOpeningBalance() {
         int accountNumber = 123;
         double startBalance = 100;
         assertThrows(InsufficientOpeningBalance.class, () -> {
@@ -68,7 +68,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void depositAmount_Success() throws Exception {
+    public void depositAmountSuccess() throws Exception {
         int accountNumber = 123;
         double startBalance = 500;
         accService.createAccount(accountNumber, startBalance);
@@ -78,16 +78,16 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void depositAmount_Fail_InvalidAccountNumber() {
+    public void depositAmountFailInvalidAccountNumber() {
         int accountNumber = 123;
         double startBalance = 500;
-        assertThrows(InvalidAccountNumber.class, () -> {
-            accService.depositAmount(accountNumber, startBalance);
-        });
+        assertThrows(InvalidAccountNumber.class, () -> 
+            accService.depositAmount(accountNumber, startBalance)
+        );
     }
 
     @Test
-    public void withdrawAmount_Success() throws Exception{
+    public void withdrawAmountSuccess() throws Exception{
         int accountNumber = 123;
         double startBalance = 500;
         double amount = 100;
@@ -97,16 +97,16 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void withdrawAmount_Fail_InvalidAccountNumber() {
+    public void withdrawAmountFailInvalidAccountNumber() {
         int accountNumber = 123;
         double amount = 100;
-        assertThrows(InvalidAccountNumber.class, () -> {
-            accService.withdrawAmount(accountNumber, amount);
-        });
+        assertThrows(InvalidAccountNumber.class, () -> 
+            accService.withdrawAmount(accountNumber, amount)
+        );
     }
 
     @Test
-    public void withdrawAmount_Fail_InsufficientBalance() {
+    public void withdrawAmountFailInsufficientBalance() {
         int accountNumber = 123;
         double startBalance = 500;
         double amount = 600;
@@ -117,7 +117,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void fundTransfer_Success() throws Exception {
+    public void fundTransferSuccess() throws Exception {
         int accountNumber = 123;
         int accountNumber2 = 321;
         double startBalance = 500;
@@ -132,7 +132,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void fundTransfer_Fail_InvalidAccountNumber_Origin() {
+    public void fundTransferFailInvalidAccountNumberOrigin() {
         int accountNumber = 123;
         int accountNumber2 = 321;
         double startBalance = 500;
@@ -144,7 +144,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void fundTransfer_Fail_InvalidAccountNumber_Destination() {
+    public void fundTransferFailInvalidAccountNumberDestination() {
         int accountNumber = 123;
         int accountNumber2 = 321;
         double startBalance = 500;
@@ -156,7 +156,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void fundTransfer_Fail_InsufficientBalance() {
+    public void fundTransferFailInsufficientBalance() {
         int accountNumber = 123;
         int accountNumber2 = 321;
         double startBalance = 500;
